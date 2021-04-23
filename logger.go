@@ -29,14 +29,15 @@ func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
 		}
 
 		entry := logger.WithFields(logrus.Fields{
-			"statusCode": statusCode,
-			"duration":   stop, // in nanoseconds
-			"clientIP":   clientIP,
-			"method":     c.Request.Method,
-			"path":       path,
-			"referer":    referer,
-			"dataLength": dataLength,
-			"userAgent":  clientUserAgent,
+			"statusCode":     statusCode,
+			"duration":       stop.Nanoseconds(), // in nanoseconds
+			"durationPretty": stop.String(),
+			"clientIP":       clientIP,
+			"method":         c.Request.Method,
+			"path":           path,
+			"referer":        referer,
+			"dataLength":     dataLength,
+			"userAgent":      clientUserAgent,
 		})
 
 		if len(c.Errors) > 0 {
