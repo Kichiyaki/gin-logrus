@@ -30,7 +30,7 @@ func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
 
 		entry := logger.WithFields(logrus.Fields{
 			"statusCode": statusCode,
-			"latency":    stop.String(), // time to process
+			"duration":   stop, // in nanoseconds
 			"clientIP":   clientIP,
 			"method":     c.Request.Method,
 			"path":       path,
@@ -52,7 +52,7 @@ func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
 				dataLength,
 				referer,
 				clientUserAgent,
-				stop,
+				stop.String(),
 			)
 			if statusCode >= http.StatusInternalServerError {
 				entry.Error(msg)
