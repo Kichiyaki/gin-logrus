@@ -12,7 +12,7 @@ import (
 const timeFormat = "02/Jan/2006:15:04:05 -0700"
 
 // Logger is the logrus logger handler
-func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
+func Logger(log logrus.FieldLogger) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// other handler can change c.Path so:
 		path := c.Request.URL.Path
@@ -34,7 +34,7 @@ func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
 			dataLength = 0
 		}
 
-		entry := logger.WithFields(logrus.Fields{
+		entry := log.WithFields(logrus.Fields{
 			"statusCode":     statusCode,
 			"duration":       stop.Nanoseconds(), // in nanoseconds
 			"durationPretty": stop.String(),
