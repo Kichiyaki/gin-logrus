@@ -22,7 +22,13 @@ func Logger(logger logrus.FieldLogger) gin.HandlerFunc {
 		statusCode := c.Writer.Status()
 		clientIP := c.ClientIP()
 		clientUserAgent := c.Request.UserAgent()
+		if clientUserAgent == "" {
+			clientUserAgent = "-"
+		}
 		referer := c.Request.Referer()
+		if referer == "" {
+			referer = "-"
+		}
 		dataLength := c.Writer.Size()
 		if dataLength < 0 {
 			dataLength = 0
