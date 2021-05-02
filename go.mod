@@ -1,4 +1,4 @@
-module github.com/Kichiyaki/gin-logrus
+module github.com/Kichiyaki/ginlogrus
 
 go 1.16
 
